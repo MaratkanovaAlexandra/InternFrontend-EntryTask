@@ -5,6 +5,7 @@
   import Form from "./lib/Form.svelte";
 
   type Currency = {
+    base_code: string;
     rates: Record<string, string>;
   };
 
@@ -41,9 +42,14 @@
     <Select
       title={"Select output currency"}
       {currencies}
-      on:selectCurrency={changeSelected}
+      on:selectCurrency={(event) => (outputCurrency = event.detail.id)}
     />
-    <Form />
+    {#if outputCurrency && inputCurrency}
+      <div>
+        {inputCurrency.base_code} X {outputCurrency}
+      </div>
+      <Form currency={outputCurrency} rates={inputCurrency.rates} />
+    {/if}
   {/if}
 </main>
 
