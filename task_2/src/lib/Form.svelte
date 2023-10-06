@@ -12,6 +12,18 @@
 </script>
 
 <form>
-  <input bind:value={inputValue} on:input={calcCurrency} />
-  <input bind:value={outputValue} />
+  <div class="mb-3 d-flex">
+    <input
+      class="form-control"
+      bind:value={inputValue}
+      on:input={calcCurrency}
+      placeholder="Input currency"
+    />
+    <span class="m-2 d-block"> → </span>
+    <input
+      class="form-control"
+      bind:value={outputValue}
+      placeholder="Output currency"
+    />
+  </div>
 </form>

@@ -20,19 +20,17 @@
   });
 
   const changeSelected = async (event: { detail: { id: string } }) => {
-    loading = true;
     const { data } = await getCurrencyById(event.detail.id);
     inputCurrency = data;
-    loading = false;
   };
 </script>
 
-<main>
+<main class="container p-3">
   {#if loading}
     <div>Loading...</div>
   {:else}
-    <header>
-      <h1>currency converter</h1>
+    <header class="">
+      <h1 class="text-center">Currency Converter</h1>
     </header>
     <Select
       title={"Select input currency"}
@@ -44,10 +42,11 @@
       {currencies}
       on:selectCurrency={(event) => (outputCurrency = event.detail.id)}
     />
+    <div class="mt-2 mb-2">
+      {inputCurrency?.base_code ?? "Select input currency"} → {outputCurrency ??
+        "Select output currency"}
+    </div>
     {#if outputCurrency && inputCurrency}
-      <div>
-        {inputCurrency.base_code} X {outputCurrency}
-      </div>
       <Form currency={outputCurrency} rates={inputCurrency.rates} />
     {/if}
   {/if}
